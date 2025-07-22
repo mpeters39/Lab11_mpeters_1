@@ -75,11 +75,12 @@ class AlienInvasion:
             if bullet.rect.left >= 1200:
                 self.bullets.remove(bullet)
 
-    def _create_alien(self, x_position):
+    def _create_alien(self, x_position, y_position):
         """Create an alien and place it in the row"""
         new_alien = Alien(self)
         new_alien.x = x_position
         new_alien.rect.x = x_position
+        new_alien.rect.y = y_position
         self.aliens.add(new_alien)
 
     def _create_fleet(self):
