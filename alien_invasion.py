@@ -106,6 +106,7 @@ class AlienInvasion:
             self.ship.update()
             self.bullets.update()
             self._delete_bullets()
+            self.aliens.update()
             self._update_screen()
 
 

@@ -13,3 +13,5 @@ class Settings:
         self.bullets_allowed = 10
 
         self.ship_orientation = -90
+
+        self.alien_speed = 1.0
