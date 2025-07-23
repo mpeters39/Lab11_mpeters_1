@@ -10,13 +10,11 @@ class Ship:
         self.corrected_image = pygame.transform.rotate(self.image, self.settings.ship_orientation)
         self.rect = self.corrected_image.get_rect()
 
-        self.rect.midleft = self.screen_rect.midleft
 
         self.moving_down = False
         self.moving_up = False
 
-        self.y = float(self.rect.y)
-        
+        self.center_ship()
 
 
     def blitme(self):
@@ -31,4 +29,8 @@ class Ship:
             self.rect.y -= self.settings.ship_speed
 
         self.y = self.rect.y
-        #self.rect.y = self.y
+
+
+    def center_ship(self):
+        self.rect.midleft = self.screen_rect.midleft
+        self.y = float(self.rect.y)

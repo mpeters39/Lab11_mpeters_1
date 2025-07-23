@@ -85,6 +85,14 @@ class AlienInvasion:
         self.aliens.add(new_alien)
 
 
+    def _ship_hit(self):
+        self.bullets.empty()
+        self.aliens.empty()
+
+        self._create_fleet()
+        self.ship.center_ship()
+
+
     def _update_aliens(self):
         self._check_fleet_edges()
         self.aliens.update()
