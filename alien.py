@@ -10,10 +10,11 @@ class Alien(Sprite):
         self.settings = ai_game.settings
 
         self.image = pygame.image.load("Images\\alien.bmp")
-        self.rect = self.image.get_rect()
+        self.corrected_image = pygame.transform.rotate(self.image, self.settings.alien_orientation)
+        self.rect = self.corrected_image.get_rect()
 
-        self.rect.x = self.rect.width
-        self.rect.y = self.rect.height
+        self.rect.x = self.rect.height
+        self.rect.y = self.rect.width
 
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
@@ -22,7 +23,7 @@ class Alien(Sprite):
     def check_edges(self):
         """Return True if alien is at edge of screen."""
         screen_rect = self.screen.get_rect()
-        return (self.rect.right >= screen_rect.right) or (self.rect.left <= 0)
+        return (self.rect.bottom <= screen_rect.bottom) or (self.rect.top >= 0)
 
     def update(self):
         """Move the alien to the right."""
