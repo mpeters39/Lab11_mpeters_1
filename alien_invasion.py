@@ -86,16 +86,24 @@ class AlienInvasion:
 
 
     def _update_aliens(self):
+        self._check_fleet_edges()
         self.aliens.update()
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            print("Ship hit!!!")
 
 
     def _update_bullets(self):
         self.bullets.update()
+        self._delete_bullets()
+        self._check_bullet_alien_collisions()
 
+
+    def _check_bullet_alien_collisions(self):
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)  
         if not self.aliens:
             self.bullets.empty()
             self._create_fleet()
+
 
     def _update_ship(self):
         self.ship.update()
@@ -129,6 +137,7 @@ class AlienInvasion:
 
             current_x = alien_width
             current_y += (2 * alien_height)
+
 
     def run_game(self):
         while True:
