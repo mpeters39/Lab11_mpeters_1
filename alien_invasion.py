@@ -85,6 +85,20 @@ class AlienInvasion:
         self.aliens.add(new_alien)
 
 
+    def _update_aliens(self):
+        self.aliens.update()
+
+
+    def _update_bullets(self):
+        self.bullets.update()
+
+        collisions = pygame.sprite.groupcollision(self.bullets, self.aliens, True, True)  
+
+
+    def _update_ship(self):
+        self.ship.update()
+
+
     def _check_fleet_edges(self):
         """Respond appropriately if any aliens have reached an edge."""
         for alien in self.aliens.sprites():
@@ -120,11 +134,11 @@ class AlienInvasion:
             self._check_events()
 
             self.clock.tick(self.settings.clock_tick)
-            self.ship.update()
-            self.bullets.update()
+            self._update_ship()
+            self._update_bullets()
+            self._update_aliens()
             self._delete_bullets()
             self._check_fleet_edges()
-            self.aliens.update()
             self._update_screen()
 
 
