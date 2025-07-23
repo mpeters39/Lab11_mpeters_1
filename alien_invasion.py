@@ -22,6 +22,7 @@ class AlienInvasion:
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
         self.stats = GameStats(self)
+        self.game_active = True
 
         self._create_fleet()
 
@@ -90,15 +91,19 @@ class AlienInvasion:
 
 
     def _ship_hit(self):
-        self.stats.ships_left -= 1
+        if self.stats.ships_left > 1:
+            self.stats.ships_left -= 1
 
-        self.bullets.empty()
-        self.aliens.empty()
+            self.bullets.empty()
+            self.aliens.empty()
 
-        self._create_fleet()
-        self.ship.center_ship()
+            self._create_fleet()
+            self.ship.center_ship()
 
-        sleep(0.5)
+            sleep(0.5)
+        else:
+            self.game_active = False
+
 
 
     def _check_aliens_bottom(self):
@@ -169,13 +174,16 @@ class AlienInvasion:
 
             self._check_events()
 
-            self.clock.tick(self.settings.clock_tick)
-            self._update_ship()
-            self._update_bullets()
-            self._update_aliens()
-            self._delete_bullets()
-            self._check_fleet_edges()
+            if self.game_active:
+                self.clock.tick(self.settings.clock_tick)
+                self._update_ship()
+                self._update_bullets()
+                self._update_aliens()
+                self._delete_bullets()
+                self._check_fleet_edges()
+
             self._update_screen()
+            self.clock.tick(self.settings.clock_tick)
 
 
 if __name__ =='__main__':
