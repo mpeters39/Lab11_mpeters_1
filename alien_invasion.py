@@ -92,7 +92,7 @@ class AlienInvasion:
     def _update_bullets(self):
         self.bullets.update()
 
-        collisions = pygame.sprite.groupcollision(self.bullets, self.aliens, True, True)  
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)  
         if not self.aliens:
             self.bullets.empty()
             self._create_fleet()
